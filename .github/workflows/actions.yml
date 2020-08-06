@@ -4,6 +4,7 @@ on: [push]
 
 jobs:
   run-github-actions:
+    runs-on: ubuntu-latest
     steps:
       - name: simple javasccript action
         id: greet
