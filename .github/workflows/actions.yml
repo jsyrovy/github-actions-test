@@ -1,23 +1,36 @@
 name: actions workflow
 
 on:
-  # push:
+  push:
+    branches:
+      - master
+      - "!develop"
+      - "feature/*/*"
+      - "feature/**"
+    tags-ignore:
+      - v1
+    paths-ignore:
+      - "docs/**"
   pull_request:
-    types:
-      - closed
-      - assigned
-      - opened
-      - reopened
-  schedule:
-    - cron: "0 0 * * *"
-  repository_dispatch:
-    types:
-      - build
+    branches-ignore:
+      - develop
+    # types:
+  #     - closed
+  #     - assigned
+  #     - opened
+  #     - reopened
+  # schedule:
+  #   - cron: "0 0 * * *"
+  # repository_dispatch:
+  #   types:
+  #     - build
 
 jobs:
   run-github-actions:
     runs-on: ubuntu-latest
     steps:
+      - name: payloads
+        run: echo "${{ github.event.client_payload.env }}"
       - name: list files
         run: |
           pwd
