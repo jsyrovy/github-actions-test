@@ -8,6 +8,7 @@ jobs:
     steps:
       - name: echo a string
         run: ec-ho "Hello World"
+        continue-on-error: true
       - name: multiline script
         run: |
           node -v
