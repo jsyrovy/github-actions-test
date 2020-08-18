@@ -1,4 +1,6 @@
-on: push
+on:
+  - push
+  - pull_request
 
 jobs:
   functions:
@@ -10,13 +12,18 @@ jobs:
           echo ${{ startsWith('hello', 'he') }}
           echo ${{ endsWith('hello', 'lo') }}
           echo ${{ format('Hello {0} {1} {2}', 'World', '!', '!') }}
+          echo ${{ github.event_name == 'push' }}
   one:
     runs-on: ubuntu-16.04
+    if: github.event_name == 'push'
     steps:
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
+        run: ec-ho "$GITHUB_CONTEXT"
+      - name: If failure
+        if: failure()
+        run: echo "failure"
       - name: Dump job context
         env:
           JOB_CONTEXT: ${{ toJson(job) }}
