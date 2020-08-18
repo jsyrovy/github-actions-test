@@ -5,6 +5,7 @@ on: push
 jobs:
   run-shell-command:
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     steps:
       - name: echo a string
         run: ec-ho "Hello World"
@@ -18,6 +19,9 @@ jobs:
           import platform
           print(platform.processor())
         shell: python
+      - name: long test
+        timeout-minutes: 1
+        run: sleep 120
   run-windows-command:
     runs-on: windows-latest
     needs: [run-shell-command]
