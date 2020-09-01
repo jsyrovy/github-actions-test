@@ -1,9 +1,0 @@
-name: Schedule10
-on:
-  schedule:
-    - cron: "*/10 * * * *"
-jobs:
-  schedule:
-    runs-on: ubuntu-18.04
-    steps:
-      - run: date
