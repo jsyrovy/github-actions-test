@@ -1,0 +1,10 @@
+name: Downloader
+on:
+  schedule:
+    - cron: "0 * * * *"
+jobs:
+  download:
+    runs-on: ubuntu-18.04
+    steps:
+      - run: date
+ 
